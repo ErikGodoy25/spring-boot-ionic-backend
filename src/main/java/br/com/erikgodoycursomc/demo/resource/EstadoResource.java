@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.erikgodoycursomc.demo.domain.Categoria;
-import br.com.erikgodoycursomc.demo.services.CategoriaService;
+import br.com.erikgodoycursomc.demo.domain.Estado;
+import br.com.erikgodoycursomc.demo.services.EstadoService;
+
 
 @RestController
-@RequestMapping(value = "/categorias")
-public class CategoriaResource {
-
+@RequestMapping(value = "/estados")
+public class EstadoResource {
+    
     @Autowired
-    private CategoriaService service;
-
+    private EstadoService service;
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
-
-	Categoria obj = service.find(id);
+    public ResponseEntity<?> find(@PathVariable Integer id){
+	
+	Estado obj = service.find(id);
 	return ResponseEntity.ok().body(obj);
-
     }
 
 }
