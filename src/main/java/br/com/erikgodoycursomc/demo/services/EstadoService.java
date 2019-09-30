@@ -11,12 +11,13 @@ import br.com.erikgodoycursomc.demo.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class EstadoService {
-    
+
     @Autowired
     private EstadoRepository repoEstado;
-    
+
     public Estado find(Integer id) {
 	Optional<Estado> obj = repoEstado.findById(id);
-	return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado ! Id: " + id + ", Tipo: " + Estado.class.getName()));
+	return obj.orElseThrow(() -> new ObjectNotFoundException(
+		"Objeto não encontrado ! Id: " + id + ", Tipo: " + Estado.class.getName()));
     }
 }
