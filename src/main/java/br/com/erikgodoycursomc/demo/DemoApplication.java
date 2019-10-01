@@ -13,6 +13,7 @@ import br.com.erikgodoycursomc.demo.domain.Cidade;
 import br.com.erikgodoycursomc.demo.domain.Cliente;
 import br.com.erikgodoycursomc.demo.domain.Endereco;
 import br.com.erikgodoycursomc.demo.domain.Estado;
+import br.com.erikgodoycursomc.demo.domain.ItemPedido;
 import br.com.erikgodoycursomc.demo.domain.Pagamento;
 import br.com.erikgodoycursomc.demo.domain.PagamentoComBoleto;
 import br.com.erikgodoycursomc.demo.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import br.com.erikgodoycursomc.demo.repositories.CidadeRepository;
 import br.com.erikgodoycursomc.demo.repositories.ClienteRepository;
 import br.com.erikgodoycursomc.demo.repositories.EnderecoRepository;
 import br.com.erikgodoycursomc.demo.repositories.EstadoRepository;
+import br.com.erikgodoycursomc.demo.repositories.ItemPedidoRepository;
 import br.com.erikgodoycursomc.demo.repositories.PagamentoRepository;
 import br.com.erikgodoycursomc.demo.repositories.PedidoRepository;
 import br.com.erikgodoycursomc.demo.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class DemoApplication implements CommandLineRunner {
     private PedidoRepository pedidoRepository;
     @Autowired
     private PagamentoRepository pagamentoRepository;
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
     
 
     public static void main(String[] args) {
@@ -113,6 +117,19 @@ public class DemoApplication implements CommandLineRunner {
 	
 	pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 	pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+	
+	ItemPedido ip1 = new ItemPedido(ped1, p1, 200.00, 1, 2000.00);
+	ItemPedido ip2 = new ItemPedido(ped1, p3, 00.0, 2, 80.00);
+	ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+	
+	ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+	ped2.getItens().addAll(Arrays.asList(ip3));
+	
+	p1.getItens().addAll(Arrays.asList(ip1));
+	p2.getItens().addAll(Arrays.asList(ip3));
+	p3.getItens().addAll(Arrays.asList(ip2));
+	
+	itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 
     }
 
