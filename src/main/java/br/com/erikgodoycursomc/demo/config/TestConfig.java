@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import br.com.erikgodoycursomc.demo.services.DBService;
 import br.com.erikgodoycursomc.demo.services.EmailService;
 import br.com.erikgodoycursomc.demo.services.MockEmailService;
+import br.com.erikgodoycursomc.demo.services.SmtpEmailService;
 
 @Configuration
 @Profile("test")
@@ -17,6 +18,7 @@ public class TestConfig {
 
 	@Autowired
 	private DBService dbService;
+	
 	
 	@Bean
 	public boolean instantiateDatabase() throws ParseException {
@@ -28,4 +30,9 @@ public class TestConfig {
 	public EmailService emailService() {
 		return new MockEmailService();
 	}
+	
+	@Bean
+	public SmtpEmailService emailServiceSmtp() {
+		return new SmtpEmailService();
+	}	
 }
